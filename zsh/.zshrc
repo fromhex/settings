@@ -54,6 +54,8 @@ zinit wait lucid light-mode for \
     blockf atpull'zinit creinstall -q .' \
         zsh-users/zsh-completions
 
+zinit wait lucid light-mode for \
+    soimort/translate-shell
 zinit wait lucid as"completion" for \
     https://github.com/fromhex/settings/blob/main/conda/_conda \
     https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \

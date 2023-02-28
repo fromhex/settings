@@ -6,6 +6,7 @@
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' print-query alt-enter
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
 zstyle ':fzf-tab:*' accept-line enter
 zstyle ':fzf-tab:*' continuous-trigger '/'
@@ -40,7 +41,7 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 #########################
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH="$N_PREFIX/bin:$PATH" 
-export PATH="$HOME/.local/bin:/home/m0yuqi/wireshark-4.0.1:/home/m0yuqi/texlive/2022/bin/x86_64-linux:$PATH" 
+export PATH="$HOME/.local/bin:$HOME/wireshark-4.0.1:$HOME/texlive/2022/bin/x86_64-linux:$PATH" 
 # chrome TLS密钥地址，便于wiresahrk解密https流量
 export SSLKEYLOGFILE="$HOME/Documents/sslkey.log"
 
@@ -79,5 +80,6 @@ alias ida="deepin-wine6-stable /media/$USER/Data/Download/IDA_Pro_7.7/ida.exe"
 alias ida64="deepin-wine6-stable /media/$USER/Data/Download/IDA_Pro_7.7/ida64.exe"
 
 alias v2rayct="sudo $HOME/Documents/grepo/mine/v2rayCT/v2rayCT"
-alias pgit="proxychains4 git"
-alias pcs="proxychains4"
+alias pgit="proxychains4 -q git"
+alias pcs="proxychains4 -q"
+alias transz="trans zh:en"
