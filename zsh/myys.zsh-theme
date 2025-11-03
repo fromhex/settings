@@ -5,24 +5,12 @@
 #
 # Mar 2013 Yad Smood
 
-typeset +H my_gray="$FG[247]"
-
 # VCS
-YS_VCS_PROMPT_PREFIX1=" %{$my_gray%}on%{$reset_color%} "
+YS_VCS_PROMPT_PREFIX1=" %{$reset_color%}on%{$fg[blue]%} "
 YS_VCS_PROMPT_PREFIX2=":%{$fg[cyan]%}"
 YS_VCS_PROMPT_SUFFIX="%{$reset_color%}"
 YS_VCS_PROMPT_DIRTY=" %{$fg[red]%}x"
 YS_VCS_PROMPT_CLEAN=" %{$fg[green]%}o"
-
-local conda_info='$(conda_prompt_info)'
-conda_prompt_info() {
-  if [ -n "$CONDA_DEFAULT_ENV" ]; then
-    echo -n "($CONDA_DEFAULT_ENV) "
-  else 
-    echo -n ""
-  fi
-}
-
 
 # Git info
 local git_info='$(git_prompt_info)'
@@ -31,13 +19,14 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="$YS_VCS_PROMPT_SUFFIX"
 ZSH_THEME_GIT_PROMPT_DIRTY="$YS_VCS_PROMPT_DIRTY"
 ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
 
+
 # Virtualenv
 local venv_info='$(virtenv_prompt)'
 YS_THEME_VIRTUALENV_PROMPT_PREFIX=" %{$fg[green]%}"
 YS_THEME_VIRTUALENV_PROMPT_SUFFIX=" %{$reset_color%}%"
 virtenv_prompt() {
-	[[ -n ${VIRTUAL_ENV} ]] || return
-	echo "${YS_THEME_VIRTUALENV_PROMPT_PREFIX}${VIRTUAL_ENV:t}${YS_THEME_VIRTUALENV_PROMPT_SUFFIX}"
+        [[ -n "${VIRTUAL_ENV:-}" ]] || return
+        echo "${YS_THEME_VIRTUALENV_PROMPT_PREFIX}${VIRTUAL_ENV:t}${YS_THEME_VIRTUALENV_PROMPT_SUFFIX}"
 }
 
 local exit_code="%(?,,C:%{$fg[red]%}%?%{$reset_color%})"
@@ -51,13 +40,12 @@ local exit_code="%(?,,C:%{$fg[red]%}%?%{$reset_color%})"
 #
 # % ys @ ys-mbp in ~/.oh-my-zsh on git:master x [21:47:42] C:0
 # $
-PROMPT="%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
+PROMPT="
+%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
 %(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
-%{$my_gray%}@ \
+%{$reset_color%}@ \
 %{$fg[green]%}%m \
-%{$my_gray%}${conda_info} \
-${venv_info}\
-%{$my_gray%}in \
+%{$reset_color%}in \
 %{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
 ${git_info}\
 ${venv_info}\
